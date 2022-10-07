@@ -26,6 +26,8 @@ public class ThirdPersonControlles : MonoBehaviour
     private float turnSmoothVelocity; 
     public float turnSmoothTime = 0.1f; 
 
+    public GameObject[] cameras;
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -73,6 +75,17 @@ public class ThirdPersonControlles : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0, xAxis.Value, 0);
         LookAtTransform.eulerAngles = new Vector3(yAxis.Value, xAxis.Value, LookAtTransform.eulerAngles.z);
+
+        if(Input.GetButton("Fire2"))
+        {
+            cameras[0].SetActive(false);
+            cameras[1].SetActive(true);
+        }
+        else
+        {
+            cameras[0].SetActive(true);
+            cameras[1].SetActive(false);
+        }
 
         if(move != Vector3.zero)
         {
